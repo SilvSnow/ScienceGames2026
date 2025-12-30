@@ -1,0 +1,16 @@
+5013.4	Pharmacology
+4958	Chemistry
+4171.15	Biology
+3299.3	Computer Science/Psychology
+2963.9	Microbiology and Immunology
+2875	Math/Physics
+2607.2	Arts and Science
+2326.1	Biochemistry
+2148.41	Social Science
+2054.15	Environment
+1903.1	Physiology/Anatomy
+1555.9	Mac Campus
+1077.55	Neuroscience
+443.4	PTOT
+390.15	Nursing
+282.65	First Years

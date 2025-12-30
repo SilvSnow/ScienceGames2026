@@ -1,0 +1,167 @@
+/* Standings Page Specific Styles */
+
+.standings-page {
+    background: linear-gradient(135deg, #1A1A2E 0%, #16213E 100%);
+    min-height: 100vh;
+}
+
+.standings-page header {
+    color: white;
+}
+
+.standings-page header h1 {
+    color: white;
+}
+
+.standings-page header p {
+    color: #AAA;
+    margin-bottom: 12px;
+}
+
+.nav-link {
+    display: inline-block;
+    color: #FFD700;
+    text-decoration: none;
+    font-size: 14px;
+    padding: 8px 16px;
+    border: 1px solid #FFD700;
+    border-radius: 6px;
+    transition: all 0.2s;
+}
+
+.nav-link:hover {
+    background: #FFD700;
+    color: #1A1A2E;
+}
+
+/* Rankings Container */
+.rankings-container {
+    max-width: 1000px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+/* Individual Rank Row */
+.rank-row {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    background: rgba(255, 255, 255, 0.05);
+    padding: 12px 16px;
+    border-radius: 8px;
+    transition: transform 0.2s, background 0.2s;
+}
+
+.rank-row:hover {
+    background: rgba(255, 255, 255, 0.1);
+    transform: translateX(4px);
+}
+
+/* Rank Position */
+.rank-position {
+    font-size: 24px;
+    font-weight: 700;
+    color: #FFD700;
+    min-width: 40px;
+    text-align: center;
+}
+
+.rank-row:nth-child(1) .rank-position {
+    color: #FFD700;
+}
+
+.rank-row:nth-child(2) .rank-position {
+    color: #C0C0C0;
+}
+
+.rank-row:nth-child(3) .rank-position {
+    color: #CD7F32;
+}
+
+/* Team Info */
+.rank-team-info {
+    min-width: 140px;
+}
+
+.rank-team-name {
+    display: inline-block;
+    padding: 8px 16px;
+    border-radius: 6px;
+    font-weight: 600;
+    font-size: 14px;
+    white-space: nowrap;
+}
+
+/* Progress Bar */
+.rank-bar-container {
+    flex: 1;
+    height: 24px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.rank-bar {
+    height: 100%;
+    border-radius: 4px;
+    transition: width 0.5s ease-out;
+}
+
+/* Points */
+.rank-points {
+    font-size: 16px;
+    font-weight: 700;
+    color: white;
+    min-width: 100px;
+    text-align: right;
+}
+
+/* Top 3 special styling */
+.rank-row:nth-child(1) {
+    background: rgba(255, 215, 0, 0.1);
+    border: 1px solid rgba(255, 215, 0, 0.3);
+}
+
+.rank-row:nth-child(2) {
+    background: rgba(192, 192, 192, 0.1);
+    border: 1px solid rgba(192, 192, 192, 0.3);
+}
+
+.rank-row:nth-child(3) {
+    background: rgba(205, 127, 50, 0.1);
+    border: 1px solid rgba(205, 127, 50, 0.3);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .rank-row {
+        flex-wrap: wrap;
+        gap: 8px;
+    }
+
+    .rank-position {
+        font-size: 20px;
+        min-width: 30px;
+    }
+
+    .rank-team-info {
+        min-width: auto;
+    }
+
+    .rank-team-name {
+        padding: 6px 12px;
+        font-size: 12px;
+    }
+
+    .rank-bar-container {
+        width: 100%;
+        order: 3;
+    }
+
+    .rank-points {
+        font-size: 14px;
+        min-width: auto;
+    }
+}

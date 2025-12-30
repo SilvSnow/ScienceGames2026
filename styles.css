@@ -1,0 +1,273 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    background: #F5F5F5;
+    min-height: 100vh;
+    padding: 20px;
+}
+
+/* Points Banner */
+.points-banner {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 12px;
+    background: linear-gradient(135deg, #1A1A2E 0%, #16213E 100%);
+    color: white;
+    padding: 16px 24px;
+    border-radius: 12px;
+    margin-bottom: 24px;
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+    text-decoration: none;
+    font-size: 1.25rem;
+    font-weight: 600;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.points-banner:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+}
+
+.banner-arrow {
+    font-size: 1.5rem;
+    transition: transform 0.2s;
+}
+
+.points-banner:hover .banner-arrow {
+    transform: translateX(4px);
+}
+
+header {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.header-logo {
+    width: 100%;
+    height: auto;
+    display: block;
+    margin-bottom: 20px;
+}
+
+header h1 {
+    color: #333;
+    margin-bottom: 8px;
+}
+
+header p {
+    color: #666;
+}
+
+.team-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: 12px;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.team-btn {
+    padding: 20px 16px;
+    font-size: 16px;
+    font-weight: 600;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: transform 0.15s, box-shadow 0.15s;
+    color: white;
+    text-shadow: 0 1px 2px rgba(0,0,0,0.2);
+}
+
+.team-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+}
+
+.hidden {
+    display: none !important;
+}
+
+#schedule-view {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.back-button {
+    background: #666;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 6px;
+    cursor: pointer;
+    margin-bottom: 20px;
+    font-size: 14px;
+}
+
+.back-button:hover {
+    background: #555;
+}
+
+#team-name {
+    margin-bottom: 20px;
+    color: #333;
+}
+
+.day-tabs {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+}
+
+.day-tab {
+    padding: 10px 20px;
+    border: 2px solid #ddd;
+    background: white;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.day-tab:hover {
+    border-color: #999;
+}
+
+.day-tab.active {
+    background: #333;
+    color: white;
+    border-color: #333;
+}
+
+.events-list {
+    background: white;
+    border-radius: 8px;
+    padding: 16px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.event-item {
+    padding: 16px;
+    border-bottom: 1px solid #eee;
+    display: flex;
+    gap: 16px;
+    align-items: flex-start;
+}
+
+.event-item:last-child {
+    border-bottom: none;
+}
+
+.event-time {
+    font-weight: 600;
+    color: #666;
+    min-width: 80px;
+}
+
+.event-details h3 {
+    color: #333;
+    margin-bottom: 4px;
+}
+
+.event-details p {
+    color: #666;
+    font-size: 14px;
+}
+
+.no-events {
+    text-align: center;
+    padding: 40px;
+    color: #999;
+}
+
+/* Daily Info Section */
+.daily-info {
+    margin-top: 20px;
+}
+
+.info-toggle {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px 20px;
+    background: linear-gradient(135deg, #1A1A2E 0%, #16213E 100%);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: 600;
+    transition: background 0.2s;
+}
+
+.info-toggle:hover {
+    background: linear-gradient(135deg, #252542 0%, #1e2d4d 100%);
+}
+
+.toggle-icon {
+    font-size: 12px;
+    transition: transform 0.3s;
+}
+
+.info-content {
+    background: white;
+    border-radius: 0 0 8px 8px;
+    padding: 20px;
+    margin-top: -4px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.info-section {
+    margin-bottom: 20px;
+}
+
+.info-section:last-child {
+    margin-bottom: 0;
+}
+
+.info-section h4 {
+    color: #1A1A2E;
+    font-size: 14px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 10px;
+    padding-bottom: 6px;
+    border-bottom: 2px solid #F0F0F0;
+}
+
+.info-section ul {
+    list-style: none;
+    padding: 0;
+}
+
+.info-section li {
+    padding: 8px 0;
+    padding-left: 20px;
+    position: relative;
+    color: #444;
+    font-size: 14px;
+    line-height: 1.5;
+}
+
+.info-section li::before {
+    content: "•";
+    position: absolute;
+    left: 0;
+    color: #1A1A2E;
+    font-weight: bold;
+}
+
+.info-section p {
+    color: #444;
+    font-size: 14px;
+    line-height: 1.6;
+}
