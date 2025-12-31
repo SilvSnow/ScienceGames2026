@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard - Super Mario Games 2026</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="admin.css">
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
+</head>
+<body class="admin-page">
+    <!-- Login Screen -->
+    <div id="login-screen" class="login-screen">
+        <div class="login-box">
+            <h1>Admin Login</h1>
+            <p>Super Mario Games 2026</p>
+            <form id="login-form">
+                <input type="email" id="email" placeholder="Email" required>
+                <input type="password" id="password" placeholder="Password" required>
+                <button type="submit" class="btn-primary">Login</button>
+                <p id="login-error" class="error-msg hidden"></p>
+            </form>
+        </div>
+    </div>
+
+    <!-- Admin Dashboard -->
+    <div id="dashboard" class="dashboard hidden">
+        <header class="admin-header">
+            <h1>Admin Dashboard</h1>
+            <div class="header-actions">
+                <a href="index.html" class="btn-secondary">View Site</a>
+                <button id="logout-btn" class="btn-secondary">Logout</button>
+            </div>
+        </header>
+
+        <nav class="admin-nav">
+            <button class="nav-btn active" data-tab="points">Update Points</button>
+            <button class="nav-btn" data-tab="schedule">Edit Schedule</button>
+            <button class="nav-btn" data-tab="announcements">Announcements</button>
+        </nav>
+
+        <main class="admin-main">
+            <!-- Points Tab -->
+            <section id="points-tab" class="tab-content active">
+                <h2>Update Team Points</h2>
+                <div class="quick-actions">
+                    <h3>Quick Add Points</h3>
+                    <div class="quick-buttons">
+                        <button class="quick-btn" data-amount="5">+5</button>
+                        <button class="quick-btn" data-amount="10">+10</button>
+                        <button class="quick-btn" data-amount="25">+25</button>
+                        <button class="quick-btn" data-amount="50">+50</button>
+                        <button class="quick-btn" data-amount="100">+100</button>
+                    </div>
+                </div>
+                <div id="teams-list" class="teams-list">
+                    <!-- Teams will be loaded here -->
+                </div>
+            </section>
+
+            <!-- Schedule Tab -->
+            <section id="schedule-tab" class="tab-content hidden">
+                <h2>Edit Schedule</h2>
+                <div class="schedule-controls">
+                    <select id="schedule-team-select">
+                        <option value="">Select a team...</option>
+                    </select>
+                    <select id="schedule-day-select">
+                        <option value="1">Day 1</option>
+                        <option value="2">Day 2</option>
+                        <option value="3">Day 3</option>
+                        <option value="4">Day 4</option>
+                        <option value="5">Day 5</option>
+                    </select>
+                </div>
+                <div id="schedule-editor" class="schedule-editor">
+                    <div id="events-container">
+                        <!-- Events will be loaded here -->
+                    </div>
+                    <button id="add-event-btn" class="btn-secondary">+ Add Event</button>
+                    <button id="save-schedule-btn" class="btn-primary">Save Schedule</button>
+                </div>
+            </section>
+
+            <!-- Announcements Tab -->
+            <section id="announcements-tab" class="tab-content hidden">
+                <h2>Daily Announcements</h2>
+                <div class="announcement-controls">
+                    <select id="announcement-day-select">
+                        <option value="1">Day 1</option>
+                        <option value="2">Day 2</option>
+                        <option value="3">Day 3</option>
+                        <option value="4">Day 4</option>
+                        <option value="5">Day 5</option>
+                    </select>
+                </div>
+                <div id="announcement-editor" class="announcement-editor">
+                    <div class="form-group">
+                        <label>Day Title</label>
+                        <input type="text" id="day-title" placeholder="e.g., Day 1 - Opening Day">
+                    </div>
+                    <div class="form-group">
+                        <label>Announcements (one per line)</label>
+                        <textarea id="day-announcements" rows="4" placeholder="Enter announcements..."></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label>Tips (one per line)</label>
+                        <textarea id="day-tips" rows="4" placeholder="Enter tips..."></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label>Locations</label>
+                        <input type="text" id="day-locations" placeholder="Location info...">
+                    </div>
+                    <div class="form-group">
+                        <label>Contact</label>
+                        <input type="text" id="day-contact" placeholder="Contact info...">
+                    </div>
+                    <button id="save-announcement-btn" class="btn-primary">Save Announcements</button>
+                </div>
+            </section>
+        </main>
+
+        <!-- Toast notification -->
+        <div id="toast" class="toast hidden">
+            <span id="toast-message"></span>
+        </div>
+    </div>
+
+    <script src="firebase-config.js"></script>
+    <script src="admin.js"></script>
+</body>
+</html>

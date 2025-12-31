@@ -5,14 +5,24 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Super Mario Games 2026 - Team Scheduler</title>
     <link rel="stylesheet" href="styles.css">
+    <!-- Firebase SDK (optional - for live updates) -->
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
 </head>
 <body>
-    <img src="flag.png" alt="Super Mario Games Logo" class="header-logo">
+    <img src="Flag.png" alt="Super Mario Games Logo" class="header-logo">
 
-    <a href="standings.html" class="points-banner">
-        <span>View Points</span>
-        <span class="banner-arrow">→</span>
-    </a>
+    <div class="banner-row">
+        <a href="standings.html" class="points-banner">
+            <span>View Points</span>
+            <span class="banner-arrow">→</span>
+        </a>
+        <a href="brackets.html" class="points-banner brackets-banner">
+            <span>View Brackets</span>
+            <span class="banner-arrow">→</span>
+        </a>
+    </div>
 
     <header>
         <h1>Super Mario Games 2026</h1>
@@ -55,6 +65,7 @@
 
     <script src="teams-config.js"></script>
     <script src="data.js"></script>
+    <script src="firebase-config.js"></script>
     <script src="app.js"></script>
 </body>
 </html>

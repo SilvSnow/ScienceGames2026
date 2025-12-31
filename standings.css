@@ -18,6 +18,13 @@
     margin-bottom: 12px;
 }
 
+.nav-links {
+    display: flex;
+    gap: 12px;
+    justify-content: center;
+    margin-top: 12px;
+}
+
 .nav-link {
     display: inline-block;
     color: #FFD700;

@@ -1,0 +1,539 @@
+/* Admin Page Styles */
+
+.admin-page {
+    background: #F0F2F5;
+    min-height: 100vh;
+    padding: 0;
+}
+
+/* Login Screen */
+.login-screen {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background: linear-gradient(135deg, #1A1A2E 0%, #16213E 100%);
+}
+
+.login-box {
+    background: white;
+    padding: 40px;
+    border-radius: 12px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+    width: 100%;
+    max-width: 400px;
+    text-align: center;
+}
+
+.login-box h1 {
+    margin-bottom: 8px;
+    color: #1A1A2E;
+}
+
+.login-box > p {
+    color: #666;
+    margin-bottom: 24px;
+}
+
+.login-box input {
+    width: 100%;
+    padding: 14px 16px;
+    margin-bottom: 16px;
+    border: 2px solid #E0E0E0;
+    border-radius: 8px;
+    font-size: 16px;
+    transition: border-color 0.2s;
+}
+
+.login-box input:focus {
+    outline: none;
+    border-color: #1A1A2E;
+}
+
+.error-msg {
+    color: #E74C3C;
+    font-size: 14px;
+    margin-top: 12px;
+}
+
+/* Buttons */
+.btn-primary {
+    background: linear-gradient(135deg, #1A1A2E 0%, #16213E 100%);
+    color: white;
+    border: none;
+    padding: 14px 24px;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    width: 100%;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.btn-secondary {
+    background: white;
+    color: #1A1A2E;
+    border: 2px solid #1A1A2E;
+    padding: 10px 20px;
+    border-radius: 6px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    text-decoration: none;
+    transition: all 0.2s;
+}
+
+.btn-secondary:hover {
+    background: #1A1A2E;
+    color: white;
+}
+
+/* Dashboard Header */
+.admin-header {
+    background: linear-gradient(135deg, #1A1A2E 0%, #16213E 100%);
+    color: white;
+    padding: 20px 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.admin-header h1 {
+    font-size: 1.5rem;
+    color: white;
+}
+
+.header-actions {
+    display: flex;
+    gap: 12px;
+}
+
+.header-actions .btn-secondary {
+    border-color: white;
+    color: white;
+}
+
+.header-actions .btn-secondary:hover {
+    background: white;
+    color: #1A1A2E;
+}
+
+/* Navigation */
+.admin-nav {
+    background: white;
+    padding: 0 30px;
+    display: flex;
+    gap: 8px;
+    border-bottom: 1px solid #E0E0E0;
+}
+
+.nav-btn {
+    background: none;
+    border: none;
+    padding: 16px 24px;
+    font-size: 14px;
+    font-weight: 600;
+    color: #666;
+    cursor: pointer;
+    border-bottom: 3px solid transparent;
+    transition: all 0.2s;
+}
+
+.nav-btn:hover {
+    color: #1A1A2E;
+}
+
+.nav-btn.active {
+    color: #1A1A2E;
+    border-bottom-color: #1A1A2E;
+}
+
+/* Main Content */
+.admin-main {
+    padding: 30px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.tab-content h2 {
+    margin-bottom: 24px;
+    color: #1A1A2E;
+}
+
+/* Quick Actions */
+.quick-actions {
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.quick-actions h3 {
+    font-size: 14px;
+    color: #666;
+    margin-bottom: 12px;
+}
+
+.quick-buttons {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+.quick-btn {
+    background: #E8E8E8;
+    border: 2px solid transparent;
+    padding: 10px 20px;
+    border-radius: 6px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.quick-btn:hover {
+    background: #D0D0D0;
+}
+
+.quick-btn.selected {
+    background: #1A1A2E;
+    color: white;
+}
+
+/* Teams List */
+.teams-list {
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    overflow: hidden;
+}
+
+.team-row {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 16px 20px;
+    border-bottom: 1px solid #F0F0F0;
+}
+
+.team-row:last-child {
+    border-bottom: none;
+}
+
+.team-rank {
+    font-weight: 700;
+    color: #999;
+    width: 40px;
+}
+
+.team-name {
+    padding: 8px 16px;
+    border-radius: 6px;
+    font-weight: 600;
+    font-size: 14px;
+    min-width: 140px;
+    text-align: center;
+}
+
+.team-points-control {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-left: auto;
+}
+
+.points-btn {
+    width: 36px;
+    height: 36px;
+    border: none;
+    border-radius: 6px;
+    font-size: 20px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.points-btn.minus {
+    background: #FFEBEE;
+    color: #E74C3C;
+}
+
+.points-btn.minus:hover {
+    background: #E74C3C;
+    color: white;
+}
+
+.points-btn.plus {
+    background: #E8F5E9;
+    color: #27AE60;
+}
+
+.points-btn.plus:hover {
+    background: #27AE60;
+    color: white;
+}
+
+.points-input {
+    width: 100px;
+    padding: 8px 12px;
+    border: 2px solid #E0E0E0;
+    border-radius: 6px;
+    font-size: 16px;
+    font-weight: 600;
+    text-align: center;
+}
+
+.points-input:focus {
+    outline: none;
+    border-color: #1A1A2E;
+}
+
+.btn-save-points {
+    background: #27AE60;
+    color: white;
+    border: none;
+    padding: 10px 16px;
+    border-radius: 6px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.btn-save-points:hover {
+    background: #219A52;
+}
+
+/* Schedule Editor */
+.schedule-controls {
+    display: flex;
+    gap: 16px;
+    margin-bottom: 20px;
+}
+
+.schedule-controls select {
+    padding: 12px 16px;
+    border: 2px solid #E0E0E0;
+    border-radius: 8px;
+    font-size: 14px;
+    min-width: 200px;
+    cursor: pointer;
+}
+
+.schedule-controls select:focus {
+    outline: none;
+    border-color: #1A1A2E;
+}
+
+.schedule-editor {
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.event-row {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 12px;
+    align-items: center;
+}
+
+.event-row input {
+    padding: 10px 12px;
+    border: 2px solid #E0E0E0;
+    border-radius: 6px;
+    font-size: 14px;
+}
+
+.event-row input:focus {
+    outline: none;
+    border-color: #1A1A2E;
+}
+
+.event-time {
+    width: 120px;
+}
+
+.event-name {
+    flex: 2;
+}
+
+.event-location {
+    flex: 1;
+}
+
+.btn-remove-event {
+    width: 36px;
+    height: 36px;
+    border: none;
+    background: #FFEBEE;
+    color: #E74C3C;
+    border-radius: 6px;
+    font-size: 20px;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.btn-remove-event:hover {
+    background: #E74C3C;
+    color: white;
+}
+
+.schedule-editor .btn-secondary {
+    margin-right: 12px;
+    margin-top: 16px;
+}
+
+.schedule-editor .btn-primary {
+    width: auto;
+    margin-top: 16px;
+}
+
+.hint {
+    color: #999;
+    font-style: italic;
+    padding: 20px 0;
+}
+
+/* Announcements Editor */
+.announcement-controls {
+    margin-bottom: 20px;
+}
+
+.announcement-controls select {
+    padding: 12px 16px;
+    border: 2px solid #E0E0E0;
+    border-radius: 8px;
+    font-size: 14px;
+    min-width: 200px;
+    cursor: pointer;
+}
+
+.announcement-editor {
+    background: white;
+    padding: 24px;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 8px;
+}
+
+.form-group input,
+.form-group textarea {
+    width: 100%;
+    padding: 12px 16px;
+    border: 2px solid #E0E0E0;
+    border-radius: 8px;
+    font-size: 14px;
+    font-family: inherit;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+    outline: none;
+    border-color: #1A1A2E;
+}
+
+.form-group textarea {
+    resize: vertical;
+    min-height: 100px;
+}
+
+.announcement-editor .btn-primary {
+    width: auto;
+}
+
+/* Toast Notification */
+.toast {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    background: #27AE60;
+    color: white;
+    padding: 16px 24px;
+    border-radius: 8px;
+    font-weight: 600;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+    animation: slideIn 0.3s ease;
+}
+
+.toast.error {
+    background: #E74C3C;
+}
+
+@keyframes slideIn {
+    from {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .admin-header {
+        flex-direction: column;
+        gap: 16px;
+        text-align: center;
+    }
+
+    .admin-nav {
+        overflow-x: auto;
+        padding: 0 16px;
+    }
+
+    .nav-btn {
+        padding: 16px;
+        white-space: nowrap;
+    }
+
+    .admin-main {
+        padding: 16px;
+    }
+
+    .team-row {
+        flex-wrap: wrap;
+    }
+
+    .team-points-control {
+        margin-left: 0;
+        width: 100%;
+        justify-content: center;
+        margin-top: 12px;
+    }
+
+    .event-row {
+        flex-wrap: wrap;
+    }
+
+    .event-row input {
+        width: 100%;
+    }
+
+    .schedule-controls {
+        flex-direction: column;
+    }
+
+    .schedule-controls select {
+        width: 100%;
+    }
+}

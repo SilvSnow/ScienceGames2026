@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Firebase Setup - Super Mario Games 2026</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
+    <style>
+        .setup-container {
+            max-width: 600px;
+            margin: 40px auto;
+            padding: 20px;
+        }
+        .setup-box {
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+        }
+        .setup-box h2 {
+            margin-bottom: 16px;
+            color: #1A1A2E;
+        }
+        .setup-box p {
+            color: #666;
+            margin-bottom: 16px;
+            line-height: 1.6;
+        }
+        .btn {
+            background: linear-gradient(135deg, #1A1A2E 0%, #16213E 100%);
+            color: white;
+            border: none;
+            padding: 14px 24px;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            margin-right: 10px;
+            margin-bottom: 10px;
+        }
+        .btn:hover {
+            opacity: 0.9;
+        }
+        .btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+        .btn.success {
+            background: #27AE60;
+        }
+        .status {
+            padding: 12px;
+            border-radius: 6px;
+            margin-top: 16px;
+            display: none;
+        }
+        .status.show {
+            display: block;
+        }
+        .status.success {
+            background: #E8F5E9;
+            color: #27AE60;
+        }
+        .status.error {
+            background: #FFEBEE;
+            color: #E74C3C;
+        }
+        .status.info {
+            background: #E3F2FD;
+            color: #1976D2;
+        }
+        .checklist {
+            list-style: none;
+            padding: 0;
+        }
+        .checklist li {
+            padding: 8px 0;
+            padding-left: 28px;
+            position: relative;
+        }
+        .checklist li::before {
+            content: "○";
+            position: absolute;
+            left: 0;
+            color: #999;
+        }
+        .checklist li.done::before {
+            content: "✓";
+            color: #27AE60;
+        }
+    </style>
+</head>
+<body>
+    <div class="setup-container">
+        <h1>Firebase Setup</h1>
+        <p>This tool helps you initialize your Firebase database with your existing team and schedule data.</p>
+
+        <div class="setup-box">
+            <h2>Step 1: Create Firebase Project</h2>
+            <ul class="checklist">
+                <li id="check-1">Go to <a href="https://console.firebase.google.com" target="_blank">Firebase Console</a></li>
+                <li id="check-2">Create a new project (or use existing)</li>
+                <li id="check-3">Go to Project Settings → Your Apps → Add Web App</li>
+                <li id="check-4">Copy the config values to <code>firebase-config.js</code></li>
+            </ul>
+        </div>
+
+        <div class="setup-box">
+            <h2>Step 2: Enable Services</h2>
+            <ul class="checklist">
+                <li id="check-5">In Firebase Console → Build → Firestore Database → Create Database</li>
+                <li id="check-6">Choose "Start in test mode" (you can secure it later)</li>
+                <li id="check-7">In Firebase Console → Build → Authentication → Get Started</li>
+                <li id="check-8">Enable Email/Password sign-in method</li>
+                <li id="check-9">Add an admin user in Authentication → Users → Add User</li>
+            </ul>
+        </div>
+
+        <div class="setup-box">
+            <h2>Step 3: Initialize Data</h2>
+            <p>Once Firebase is configured, click the buttons below to populate your database with the current local data.</p>
+
+            <button id="init-teams" class="btn">Initialize Teams</button>
+            <button id="init-schedules" class="btn">Initialize Schedules</button>
+            <button id="init-daily" class="btn">Initialize Daily Info</button>
+            <button id="init-games" class="btn">Initialize Games & Brackets</button>
+            <button id="init-all" class="btn success">Initialize All</button>
+
+            <div id="status" class="status"></div>
+        </div>
+
+        <div class="setup-box">
+            <h2>Step 4: Test</h2>
+            <p>After initialization:</p>
+            <ul class="checklist">
+                <li>Visit <a href="admin.html">Admin Dashboard</a> and login</li>
+                <li>Try updating points for a team</li>
+                <li>Check the <a href="standings.html">Standings Page</a> to see live updates</li>
+            </ul>
+        </div>
+    </div>
+
+    <script src="teams-config.js"></script>
+    <script src="data.js"></script>
+    <script src="firebase-config.js"></script>
+    <script>
+        const statusEl = document.getElementById('status');
+
+        function showStatus(message, type = 'info') {
+            statusEl.textContent = message;
+            statusEl.className = `status show ${type}`;
+        }
+
+        function isConfigured() {
+            try {
+                return firebaseConfig.apiKey && !firebaseConfig.apiKey.includes('YOUR_');
+            } catch (e) {
+                return false;
+            }
+        }
+
+        // Initialize teams in Firebase
+        async function initTeams() {
+            if (!isConfigured()) {
+                showStatus('Please configure Firebase first (edit firebase-config.js)', 'error');
+                return;
+            }
+
+            showStatus('Initializing teams...', 'info');
+
+            try {
+                const batch = db.batch();
+
+                teams.forEach(team => {
+                    const docRef = db.collection('teams').doc(String(team.id));
+                    batch.set(docRef, {
+                        name: team.name,
+                        color: team.color,
+                        points: team.points,
+                        darkText: team.darkText
+                    });
+                });
+
+                await batch.commit();
+                showStatus(`Successfully initialized ${teams.length} teams!`, 'success');
+            } catch (e) {
+                showStatus('Error: ' + e.message, 'error');
+            }
+        }
+
+        // Initialize schedules in Firebase
+        async function initSchedules() {
+            if (!isConfigured()) {
+                showStatus('Please configure Firebase first (edit firebase-config.js)', 'error');
+                return;
+            }
+
+            showStatus('Initializing schedules...', 'info');
+
+            try {
+                const batch = db.batch();
+
+                Object.keys(schedules).forEach(teamId => {
+                    const docRef = db.collection('schedules').doc(String(teamId));
+                    batch.set(docRef, schedules[teamId]);
+                });
+
+                await batch.commit();
+                showStatus(`Successfully initialized schedules!`, 'success');
+            } catch (e) {
+                showStatus('Error: ' + e.message, 'error');
+            }
+        }
+
+        // Initialize daily info in Firebase
+        async function initDailyInfo() {
+            if (!isConfigured()) {
+                showStatus('Please configure Firebase first (edit firebase-config.js)', 'error');
+                return;
+            }
+
+            showStatus('Initializing daily info...', 'info');
+
+            try {
+                const batch = db.batch();
+
+                Object.keys(dailyInfo).forEach(day => {
+                    const docRef = db.collection('dailyInfo').doc(String(day));
+                    batch.set(docRef, dailyInfo[day]);
+                });
+
+                await batch.commit();
+                showStatus(`Successfully initialized daily info for ${Object.keys(dailyInfo).length} days!`, 'success');
+            } catch (e) {
+                showStatus('Error: ' + e.message, 'error');
+            }
+        }
+
+        // Initialize games and brackets in Firebase
+        async function initGames() {
+            if (!isConfigured()) {
+                showStatus('Please configure Firebase first (edit firebase-config.js)', 'error');
+                return;
+            }
+
+            showStatus('Initializing games and brackets...', 'info');
+
+            try {
+                // Sample games
+                const games = [
+                    { id: 'mario-kart', name: 'Mario Kart', status: 'Not Started' },
+                    { id: 'smash-bros', name: 'Super Smash Bros', status: 'Not Started' },
+                    { id: 'mario-party', name: 'Mario Party', status: 'Not Started' },
+                    { id: 'splatoon', name: 'Splatoon', status: 'Not Started' },
+                    { id: 'pokemon', name: 'Pokemon Battle', status: 'Not Started' },
+                    { id: 'trivia', name: 'Science Trivia', status: 'Not Started' }
+                ];
+
+                const batch = db.batch();
+
+                // Add games
+                games.forEach(game => {
+                    const docRef = db.collection('games').doc(game.id);
+                    batch.set(docRef, { name: game.name, status: game.status });
+                });
+
+                // Create empty bracket structure for each game
+                // 16 teams = Round of 16 (8 matches) -> Quarters (4) -> Semis (2) -> Finals (1) + 3rd Place
+                const emptyBracket = {
+                    rounds: [
+                        { name: 'Round of 16', matches: Array(8).fill(null).map(() => ({ team1: null, team2: null, score1: null, score2: null, winner: null, time: '' })) },
+                        { name: 'Quarterfinals', matches: Array(4).fill(null).map(() => ({ team1: null, team2: null, score1: null, score2: null, winner: null, time: '' })) },
+                        { name: 'Semifinals', matches: Array(2).fill(null).map(() => ({ team1: null, team2: null, score1: null, score2: null, winner: null, time: '' })) },
+                        { name: 'Finals', matches: [{ team1: null, team2: null, score1: null, score2: null, winner: null, time: '' }] }
+                    ],
+                    thirdPlace: { team1: null, team2: null, score1: null, score2: null, winner: null, time: '' }
+                };
+
+                games.forEach(game => {
+                    const docRef = db.collection('brackets').doc(game.id);
+                    batch.set(docRef, emptyBracket);
+                });
+
+                await batch.commit();
+                showStatus(`Successfully initialized ${games.length} games with brackets!`, 'success');
+            } catch (e) {
+                showStatus('Error: ' + e.message, 'error');
+            }
+        }
+
+        // Initialize everything
+        async function initAll() {
+            if (!isConfigured()) {
+                showStatus('Please configure Firebase first (edit firebase-config.js)', 'error');
+                return;
+            }
+
+            showStatus('Initializing all data...', 'info');
+
+            try {
+                await initTeams();
+                await initSchedules();
+                await initDailyInfo();
+                await initGames();
+                showStatus('All data initialized successfully!', 'success');
+            } catch (e) {
+                showStatus('Error: ' + e.message, 'error');
+            }
+        }
+
+        // Event listeners
+        document.getElementById('init-teams').addEventListener('click', initTeams);
+        document.getElementById('init-schedules').addEventListener('click', initSchedules);
+        document.getElementById('init-daily').addEventListener('click', initDailyInfo);
+        document.getElementById('init-games').addEventListener('click', initGames);
+        document.getElementById('init-all').addEventListener('click', initAll);
+
+        // Check if configured on load
+        if (isConfigured()) {
+            showStatus('Firebase is configured! You can initialize your data.', 'success');
+        } else {
+            showStatus('Firebase not configured yet. Complete Steps 1-2 first.', 'info');
+        }
+    </script>
+</body>
+</html>
